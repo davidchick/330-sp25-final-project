@@ -3,13 +3,13 @@
 ## Final Project for Q3 of Fullstack JavaScript
 
 ### Proposal and Task Breakdown
-Your Final Project proposal is due. You should submit a link to a GitHub repository that will house your submission. The project README should contain your project proposal. Your proposal should include:
+*Your Final Project proposal is due. You should submit a link to a GitHub repository that will house your submission. The project README should contain your project proposal. Your proposal should include:*
 
 ### 1. A description of your project's context/subject matter (i.e. gaming, project management, image processing, etc.).
-My project will be a set of APIs for a comparison shopping tool for IRL grocery shopping. The app itself will help users make smarter shopping decisions.
+My project will be a set of APIs for a comparison shopping tool for IRL grocery shopping. The app itself will help users make smarter shopping decisions by letting them log real-world grocery prices, and return comparison data from stores in their area.
 
 ### 2. A description of what problem your project seeks to solve.
-People often feel that one store is more or less expensive than another, without hard data to back it up. Stores will  mark down certain items (like milk or bananas) that consumers tend to notice/remember the price of, to give the perception that their store is less expensive. But is it true? This application will allow users to track real grocery prices in stores to give them a fact-based set of data to compare grocery prices in their geographic area.
+People often feel that one store is more or less expensive than another, without hard data to back it up. Stores will  mark down certain items (like milk or bananas) that consumers tend to notice/remember the price of, to give the perception that their store is less expensive. But is it true? This application will allow users to track and compare real grocery prices in stores to give them a fact-based set of data to evaluate grocery stores in their geographic area.
 
 ### 3. A description of what the technical components of your project will be, including: the routes, the data models, any external data sources you'll use, etc.
 
