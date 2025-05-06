@@ -1,0 +1,24 @@
+{
+  "name": "330-sp25-final-project",
+  "version": "1.0.0",
+  "description": "final project for javascript course, q3",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidchick/330-sp25-final-project.git"
+  },
+  "author": "David Chick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidchick/330-sp25-final-project/issues"
+  },
+  "homepage": "https://github.com/davidchick/330-sp25-final-project#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.5.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
