@@ -13,7 +13,7 @@ People often feel that one store is more or less expensive than another, without
 
 ### 3. A description of what the technical components of your project will be, including: the routes, the data models, any external data sources you'll use, etc.
 
-Collections and data model
+#### Collections and data model
 
 Users  
 -email  
@@ -41,7 +41,7 @@ Price
 -storeId  
 -itemId  
 
-Routes  
+#### Routes  
 
 Users  
 POST /users - create a new user  
