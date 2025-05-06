@@ -9,64 +9,65 @@
 My project will be a set of APIs for a comparison shopping tool for IRL grocery shopping. The app itself will help users making smarter shopping decisions.
 
 ### 2. A description of what problem your project seeks to solve.
-People often feel that one store is more or less expensive than another, without hard data to back it up. Stores will  mark down certain items (like milk or bananas) that consumers tend to notice/remember the price of, to give the perception that their store is less expensive. But is it true? This application will attempt to track real grocery prices in stores to give consumers a fact-based set of data to compare grocery prices in their geographic area.
+People often feel that one store is more or less expensive than another, without hard data to back it up. Stores will  mark down certain items (like milk or bananas) that consumers tend to notice/remember the price of, to give the perception that their store is less expensive. But is it true? This application will allow users to track real grocery prices in stores to give them a fact-based set of data to compare grocery prices in their geographic area.
 
 ### 3. A description of what the technical components of your project will be, including: the routes, the data models, any external data sources you'll use, etc.
 
 This will be an express application with a Mongo db backend. There will be authentication and authorization.
 
-Collections and data model:
+Collections and data model
 
-Users
--email
--password
--roles
+Users  
+-email  
+-password  
+-roles  
 
-Stores
--store name
--store location
--userId
+Stores  
+-store name  
+-store location  
+-userId  
 
-Items
--name
--description
--category
--userId
+Items  
+-name  
+-description  
+-category  
+-userId  
 
-Price
--price
--size
--unit price
--onsale
--date
--userId
--storeId
--itemId
+Price  
+-price  
+-size  
+-unit price  
+-onsale  
+-date  
+-userId  
+-storeId  
+-itemId  
 
-Routes
-Users
-POST /users - create a new user
-GET /users - get all users
-GET /uers/:userId/items - get all items for a user
-PUT /users/:userId - update a user
+Routes  
 
-Stores
-POST /stores - create a store
-GET /stores - get all stores
-GET /stores/:storeId/items - get all items for a store
-PUT /stores/:storeId - update a store
+Users  
+POST /users - create a new user  
+GET /users - get all users  
+GET /uers/:userId/items - get all items for a user  
+PUT /users/:userId - update a user  
 
-Items
-POST /items
-GET /items
-GET /items/:itemId
-PUT /items/:itemId
+Stores  
+POST /stores - create a store  
+GET /stores - get all stores  
+GET /stores/:storeId/items - get all items for a store  
+PUT /stores/:storeId - update a store  
 
-Prices
-POST /prices
-GET /prices
-GET /prices/:priceId
-PUT /items/:priceId
+Items  
+POST /items  
+GET /items  
+GET /items/:itemId  
+PUT /items/:itemId  
+
+Prices  
+POST /prices  
+GET /prices  
+GET /prices/:priceId  
+PUT /items/:priceId  
 
 
 ### 4. Clear and direct call-outs of how you will meet the various project requirements.
