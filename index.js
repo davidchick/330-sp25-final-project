@@ -1,10 +1,12 @@
+require('dotenv').config();
 const server = require("./server");
 const mongoose = require("mongoose");
 
 const port = process.env.PORT || 3000;
+const MONGO_CONNECT_URI = process.env.MONGO_CONNECT_URI;
 
 mongoose
-  .connect("mongodb://127.0.0.1/jscript-330-final-project", {})
+  .connect(MONGO_CONNECT_URI, {})
   .then(() => {
     server.listen(port, () => {
       console.log(`Server is listening on http://localhost:${port}`);
