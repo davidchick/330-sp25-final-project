@@ -45,7 +45,8 @@ router.get("/", authenticateUser, async (req, res, next) => {
 router.post("/", authenticateUser, authorizeUser, async (req, res, next) => {
     const { name, location } = req.body;
     if (name && location) {
-        const newItem = await storesDAO.create(name, location);
+        console.log(req.user);
+        const newItem = await storesDAO.create(name, location, req.user);
         return res.status(200).json(newItem);
     }
 });

@@ -54,3 +54,13 @@ module.exports.findByEmail = (email) => {
       throw e;
     }
   }
+
+  module.exports.updateRoles = async (userId, roles) => {
+    try {
+      const updatedUser = await User.findByIdAndUpdate(userId, { roles: roles }, { returnDocument: 'after' });
+      return updatedUser;
+    } catch (e) {
+      throw e;
+    }
+
+  }

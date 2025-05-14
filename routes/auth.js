@@ -3,6 +3,7 @@ const router = Router();
 const jwt = require('jsonwebtoken');
 const authDAO = require('../daos/auth');
 
+// Authenticate
 const authenticate = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
@@ -18,6 +19,14 @@ const authenticate = (req, res, next) => {
     }
 }
 
+// Authorize User
+const authorizeUser = (req, res, next) => {
+    if (req.user.roles.includes('admin')) {
+        return next();
+    } else {
+        return res.sendStatus(403);
+    }
+};
 
 // Login
 router.post("/login", async (req, res, next) => {
@@ -51,9 +60,6 @@ router.put("/password", authenticate, async (req, res, next) => {
     return res.sendStatus(200);
 });
 
-// POST /auth/logout
-
-// POST /signup
 // Create User
 router.post("/signup", async (req, res, next) => {
     try {
@@ -73,7 +79,16 @@ router.post("/signup", async (req, res, next) => {
     }
 });
 
+// Set admin
+router.put("/roles", authenticate, authorizeUser, async (req, res, next) => {
+    const { userId, roles } = req.body;
+    if (!userId || !roles) {
+        return res.status(400).send('userId and roles are required');
+    }
+    const updatedUser = await authDAO.updateRoles(userId, roles);
+    return res.json(updatedUser); 
 
+});
 
 
 module.exports = router;
