@@ -3,9 +3,9 @@ const Store = require('../models/store');
 
 module.exports = {};
 
-module.exports.create = (name, location, user) => {
+module.exports.create = (store) => {
     try {
-      const created = Store.create({name: name, location: location, userId: user});
+      const created = Store.create(store);
       return created;
     } catch (e) {
       throw e;
@@ -13,15 +13,11 @@ module.exports.create = (name, location, user) => {
   }
   
   module.exports.getAll = () => {
-    return Store.find().populate('userid');
+    return Store.find().populate('userId');
   }
   
   module.exports.getById = (id) => {
     return Store.findById(id).populate('userId');
-  }
-  
-  module.exports.getAList = (items) => {
-    return Store.find({ _id: { $in: items } });
   }
   
   module.exports.updateItem = (id, update) => {

@@ -50,7 +50,7 @@ router.post("/login", async (req, res, next) => {
     }
 });
 
-// PUT /auth/password
+// Update Password
 router.put("/password", authenticate, async (req, res, next) => {
     const { password } = req.body;
     if (!password) {
@@ -79,7 +79,7 @@ router.post("/signup", async (req, res, next) => {
     }
 });
 
-// Set admin
+// Admin user can update roles
 router.put("/roles", authenticate, authorizeUser, async (req, res, next) => {
     const { userId, roles } = req.body;
     if (!userId || !roles) {

@@ -28,26 +28,26 @@ const authorizeUser = (req, res, next) => {
     }
 };
 
-// Get by item ID
+// Get by store ID
 router.get("/:id", authenticateUser, async (req, res, next) => {
     const { id } = req.params;
-    const allItems = await storesDAO.getById(id);
-    return res.status(200).json(allItems);
+    const oneStore = await storesDAO.getById(id);
+    return res.status(200).json(oneStore);
 });
 
-// Get all items
+// Get all stores
 router.get("/", authenticateUser, async (req, res, next) => {
-    const allItems = await storesDAO.getAll();
-    return res.status(200).json(allItems);
+    const allStores = await storesDAO.getAll();
+    return res.status(200).json(allStores);
 });
 
 // Create a new item
 router.post("/", authenticateUser, authorizeUser, async (req, res, next) => {
-    const { name, location } = req.body;
-    if (name && location) {
-        console.log(req.user);
-        const newItem = await storesDAO.create(name, location, req.user);
-        return res.status(200).json(newItem);
+    const newStore = req.body;
+    if (newStore.name && newStore.location) {
+        newStore.userId = req.user;
+        const createdStore = await storesDAO.create(newStore);
+        return res.status(200).json(createdStore);
     }
 });
 
