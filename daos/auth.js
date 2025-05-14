@@ -31,8 +31,14 @@ module.exports.findByEmail = (email) => {
   
   module.exports.create = async (userData) => {
     try {
+      const usersExist = await User.find();
+
+      // first user automatically gets admin
+      const rolesToAssign = ['shopper'];
+      usersExist[0] ? true : rolesToAssign.push('admin');
+
       const hashedPassword = await bcrypt.hash(userData.password, 3);
-      const created = await User.create({email: userData.email, password: hashedPassword, roles: 'shopper'});
+      const created = await User.create({email: userData.email, password: hashedPassword, roles: rolesToAssign});
       return created;
     } catch (e) {
       throw e;
