@@ -21,8 +21,8 @@ Users
 -roles  
 
 Stores  
--store name  
--store location  
+-name  
+-location  
 -userId  
 
 Items  
@@ -33,8 +33,6 @@ Items
 
 Price  
 -price  
--size  
--unit price  
 -onsale  
 -date  
 -userId  
@@ -47,28 +45,29 @@ Users
 POST /users - create a new user  
 GET /users - get all users  
 GET /uers/:userId/items - get all items for a user  
-PUT /users/:userId - update a user  
+PUT /users/:userId - update a user   
+DELETE /users/delete/:userId - delete a user  
 
 Stores  
 POST /stores - create a store  
 GET /stores - get all stores  
 GET /stores/:storeId/items - get all items for a store  
 PUT /stores/:storeId - update a store  
+DELETE /stores/delete/:storeId - delete a store   
 
 Items  
 POST /items - create an item  
 GET /items - get all items  
 GET /items/:itemId - get a specific item  
-GET /items/:itemId/cheapest  
-GET /items/:itemId/priciest  
-GET /items/:itemId/mean  
 PUT /items/:itemId - update a specific item  
+DELETE /items/delete/:itemId - delete an item   
 
 Prices  
 POST /prices - create a new price  
 GET /prices - get all prices  
 GET /prices/:priceId - get a specific price  
-PUT /items/:priceId - update a price  
+PUT /prices/:priceId - update a price   
+DELETE /prices/delete/:priceId - delete a price  
 
 ### 4. Clear and direct call-outs of how you will meet the various project requirements.
 

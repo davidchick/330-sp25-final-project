@@ -17,7 +17,7 @@ const authenticate = (req, res, next) => {
     } catch (error) {
         return res.sendStatus(401);
     }
-}
+};
 
 // Authorize User
 const authorizeUser = (req, res, next) => {
@@ -86,7 +86,18 @@ router.put("/roles", authenticate, authorizeUser, async (req, res, next) => {
         return res.status(400).send('userId and roles are required');
     }
     const updatedUser = await authDAO.updateRoles(userId, roles);
-    return res.json(updatedUser); 
+    return res.status(200).json(updatedUser); 
+
+});
+
+// Admin user can delete a user
+router.delete("/delete/:id", authenticate, authorizeUser, async (req, res, next) => {
+    const { id } = req.params;
+    if (!id) {
+        return res.status(400).send('userId is required');
+    }
+    const deletedUser = await authDAO.deleteUser(id);
+    return res.status(200).json(deletedUser); 
 
 });
 

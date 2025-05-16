@@ -41,7 +41,7 @@ router.get("/", authenticateUser, async (req, res, next) => {
     return res.status(200).json(allStores);
 });
 
-// Create a new item
+// Create a new store
 router.post("/", authenticateUser, authorizeUser, async (req, res, next) => {
     const newStore = req.body;
     if (newStore.name && newStore.location) {
@@ -51,7 +51,7 @@ router.post("/", authenticateUser, authorizeUser, async (req, res, next) => {
     }
 });
 
-// Update an item
+// Update a store
 router.put("/:id", authenticateUser, authorizeUser, async (req, res, next) => {
     const { id } = req.params;
     const updatedItem = await storesDAO.updateItem(id, req.body)

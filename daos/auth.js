@@ -64,3 +64,13 @@ module.exports.findByEmail = (email) => {
     }
 
   }
+
+    module.exports.deleteUser = async (userId) => {
+    try {
+      const deletedUser = await User.findByIdAndDelete(userId);
+      return deletedUser;
+    } catch (e) {
+      throw e;
+    }
+
+  }
