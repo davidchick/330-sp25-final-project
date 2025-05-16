@@ -1,14 +1,16 @@
+require('dotenv').config();
 const mongoose = require("mongoose");
 const models = [
   require("./models/item"),
-  require("./models/order"),
+  require("./models/price"),
+  require("./models/store"),
   require("./models/user"),
 ];
 
 module.exports = {};
 
 module.exports.connectDB = async () => {
-  await mongoose.connect(process.env.MONGO_URL, {});
+  await mongoose.connect(process.env.MONGO_CONNECT_URI, {});
   await Promise.all(models.map((m) => m.syncIndexes()));
 };
 
