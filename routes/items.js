@@ -58,5 +58,14 @@ router.put("/:id", authenticateUser, authorizeUser, async (req, res, next) => {
     return res.status(200).json(updatedItem);
 });
 
+// Admin user can delete an item
+router.delete("/:id", authenticateUser, authorizeUser, async (req, res, next) => {
+    const { id } = req.params;
+    if (!id) {
+        return res.status(400).send('itemid is required');
+    }
+    const deletedItem = await itemsDAO.deleteItem(id);
+    return res.status(200).json(deletedItem);
+});
 
 module.exports = router;

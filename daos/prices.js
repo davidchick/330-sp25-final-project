@@ -23,3 +23,12 @@ module.exports.getById = (id) => {
 module.exports.updateItem = (id, update) => {
     return Price.findByIdAndUpdate(id, update, { new: true })
 }
+
+module.exports.deletePrice = async (priceId) => {
+  try {
+    const deletedPrice = await Price.findByIdAndDelete(priceId);
+    return deletedPrice;
+  } catch (e) {
+    throw e;
+  }
+}

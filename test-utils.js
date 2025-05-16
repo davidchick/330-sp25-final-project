@@ -10,7 +10,7 @@ const models = [
 module.exports = {};
 
 module.exports.connectDB = async () => {
-  await mongoose.connect(process.env.MONGO_CONNECT_URI, {});
+  await mongoose.connect(process.env.MONGO_TEST_URI, {});
   await Promise.all(models.map((m) => m.syncIndexes()));
 };
 

@@ -180,7 +180,7 @@ describe("/auth", () => {
         const loginRes1 = await request(server).post("/auth/login").send(user1);
         expect(loginRes1.statusCode).toEqual(200);
       });
-      
+
       it("should change password for user1", async () => {
         const res = await request(server)
           .put("/auth/password")

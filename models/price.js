@@ -5,7 +5,7 @@ const priceSchema = new mongoose.Schema({
   onsale: { type: Boolean, required: false },
   date: { type: Date, required: true },
   storeId: {
-    type: mongoose.Schema.Types.ObjectId, 
+    type: mongoose.Schema.Types.ObjectId,
     ref: "stores",
     required: true
   },

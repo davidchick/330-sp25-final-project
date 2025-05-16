@@ -4,8 +4,9 @@
   "description": "final project for javascript course, q3",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "jest --runInBand",
+    "test:watch": "jest --runInBand --watch",
+    "test:coverage": "jest --runInBand --coverage",
     "start": "node index.js"
   },
   "repository": {
@@ -27,5 +28,10 @@
     "mongoose": "^8.14.1",
     "nodemon": "^3.1.10",
     "supertest": "^7.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.27.0",
+    "eslint": "^9.27.0",
+    "globals": "^16.1.0"
   }
 }

@@ -59,5 +59,14 @@ router.put("/:id", authenticateUser, authorizeUser, async (req, res, next) => {
     return res.status(200).json(updatedPrice);
 });
 
+// Admin user can delete a price
+router.delete("/:id", authenticateUser, authorizeUser, async (req, res, next) => {
+    const { id } = req.params;
+    if (!id) {
+        return res.status(400).send('priceId is required');
+    }
+    const deletedPrice = await pricesDAO.deletePrice(id);
+    return res.status(200).json(deletedPrice);
+});
 
 module.exports = router;

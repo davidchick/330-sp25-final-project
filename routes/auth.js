@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const authDAO = require('../daos/auth');
 
 // Authenticate
-const authenticate = (req, res, next) => {
+const authenticateUser = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
         return res.sendStatus(401);
@@ -40,18 +40,18 @@ router.post("/login", async (req, res, next) => {
                 email: user.email,
                 _id: user._id,
                 roles: user.roles
-            }, 'shhhhh', {expiresIn: '30m'});
-            return res.status(200).send({token});
+            }, 'shhhhh', { expiresIn: '30m' });
+            return res.status(200).send({ token });
         } else {
             return res.sendStatus(401);
         }
-    } catch(e) {
+    } catch (e) {
         return res.status(500).send(e.message);
     }
 });
 
 // Update Password
-router.put("/password", authenticate, async (req, res, next) => {
+router.put("/password", authenticateUser, async (req, res, next) => {
     const { password } = req.body;
     if (!password) {
         return res.sendStatus(400);
@@ -72,32 +72,32 @@ router.post("/signup", async (req, res, next) => {
                 return res.sendStatus(409);
             }
             const savedUser = await authDAO.create(user);
-            return res.json(savedUser); 
+            return res.json(savedUser);
         }
-    } catch(e) {
+    } catch (e) {
         return res.status(500).send(e.message);
     }
 });
 
 // Admin user can update roles
-router.put("/roles", authenticate, authorizeUser, async (req, res, next) => {
+router.put("/roles", authenticateUser, authorizeUser, async (req, res, next) => {
     const { userId, roles } = req.body;
     if (!userId || !roles) {
         return res.status(400).send('userId and roles are required');
     }
     const updatedUser = await authDAO.updateRoles(userId, roles);
-    return res.status(200).json(updatedUser); 
+    return res.status(200).json(updatedUser);
 
 });
 
 // Admin user can delete a user
-router.delete("/delete/:id", authenticate, authorizeUser, async (req, res, next) => {
+router.delete("/:id", authenticateUser, authorizeUser, async (req, res, next) => {
     const { id } = req.params;
     if (!id) {
         return res.status(400).send('userId is required');
     }
     const deletedUser = await authDAO.deleteUser(id);
-    return res.status(200).json(deletedUser); 
+    return res.status(200).json(deletedUser);
 
 });
 
