@@ -2,6 +2,30 @@
 
 ## Final Project for Q3 of Fullstack JavaScript
 
+### Project Update, May 21
+
+#### Done
+* project is set up and running
+* express, mongo, supertest, git are all installed and configured
+* production instance is working with Mongodb Atlas and Railway, auto publishing from github: https://330-sp25-final-project-production.up.railway.app 
+* basic CRUD routes for Auth, Stores, Items, and Prices are all in place and working
+* testing is working and a few auth tests are running
+* postman collection is set up for demo
+
+#### To Do
+* implement some more interesting routes: highest/lowest prices, etc., using lookups.
+* indexes
+* text search (maybe)
+* write a lot more tests
+* mustache or other UI?
+
+#### Sample Routes
+* sign-up POST https://330-sp25-final-project-production.up.railway.app/auth/signup
+* login: POST https://330-sp25-final-project-production.up.railway.app/auth/login
+* get stores: GET https://330-sp25-final-project-production.up.railway.app/stores
+
+------
+
 ### Production Instance
 https://330-sp25-final-project-production.up.railway.app  
 
