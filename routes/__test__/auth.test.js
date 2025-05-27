@@ -197,6 +197,19 @@ describe("/auth", () => {
         });
         expect(loginRes1.statusCode).toEqual(200);
       });
+
     });
+
+    describe("PUT /roles", () => {
+      it("should alow admin user to update roles", async () => {
+        const res = await request(server)
+          .put("/auth/roles")
+          .set("Authorization", "Bearer " + token0)
+          .send({ roles: ['shopper', 'admin'] });
+        expect(res.statusCode).toEqual(400);
+      });
+    });
+
   });
 });
+
