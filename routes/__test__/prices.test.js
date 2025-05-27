@@ -4,6 +4,8 @@ var jwt = require("jsonwebtoken");
 const server = require("../../server");
 const testUtils = require("../../test-utils");
 
+let testDate = '2025-05-27T19:50:38.263Z';
+
 // const User = require("../../models/user");
 // const Item = require("../../models/store");
 
@@ -31,10 +33,12 @@ describe("/stores", () => {
         { name: "Milk", description: "Gallon, Organic", category: "Dairy" }
     ];
 
+
+
     const samplePrices = [
-        { price: 7.99, onsale: false, date: new Date() },
-        { price: 6.66, onsale: false, date: new Date() },
-        { price: 1.00, onsale: true, date: new Date() },
+        { price: 7.99, onsale: false },
+        { price: 6.66, onsale: false },
+        { price: 1.00, onsale: true },
     ];
 
 
@@ -56,7 +60,7 @@ describe("/stores", () => {
         let userId2;
         let token2;
 
-        let storeNumber = 0;
+        let priceNumber = 0;
 
 
         beforeAll(async () => {
@@ -117,69 +121,69 @@ describe("/stores", () => {
                 .send(sampleItems[2]);
             sampleItems[2]._id = resItem2.body._id;
             samplePrices[2].itemId = resItem1.body._id;
-            console.log(samplePrices);
+            //console.log(samplePrices);
 
         });
 
 
 
-        describe.each(sampleStores)("POST / store %#", (store) => {
+        describe.each(samplePrices)("POST / price %#", (price) => {
 
-            it("should send 403 to normal user and not store item", async () => {
+            it("should send 403 to normal user and not store price", async () => {
                 const res = await request(server)
-                    .post("/stores")
+                    .post("/prices")
                     .set("Authorization", "Bearer " + token1)
-                    .send(store);
+                    .send(price);
                 expect(res.statusCode).toEqual(403);
             });
 
-            it("should send 200 to admin user and store item", async () => {
+            it("should send 200 to admin user and store price", async () => {
                 const res = await request(server)
-                    .post("/stores")
+                    .post("/prices")
                     .set("Authorization", "Bearer " + token0)
-                    .send(store);
+                    .send(price);
                 expect(res.statusCode).toEqual(200);
-                expect(res.body).toMatchObject(store);
+                expect(res.body).toMatchObject(price);
 
-                sampleStores[storeNumber]._id = res.body._id;
-                storeNumber++;
+                samplePrices[priceNumber]._id = res.body._id;
+                priceNumber++;
             });
 
         });
 
-        describe("GET / all stores", () => {
-            it("should get all stores", async () => {
+        describe("GET / all prices", () => {
+            it("should get all prices", async () => {
                 const res = await request(server)
-                    .get("/stores")
-                    .set("Authorization", "Bearer " + token0)
-                    .send();
-                expect(res.statusCode).toEqual(200);
-                expect(res.body).toMatchObject(sampleStores);
-            });
-        });
-
-        describe.each(sampleStores)("GET / store %#", (store) => {
-            it("should get a stores", async () => {
-                const res = await request(server)
-                    .get("/stores/" + store._id)
+                    .get("/prices")
                     .set("Authorization", "Bearer " + token0)
                     .send();
                 expect(res.statusCode).toEqual(200);
-                expect(res.body).toMatchObject(store);
+                expect(res.body).toHaveLength(3);
             });
         });
 
-        describe("DELETE / store", () => {
-
-            it("should delete a store", async () => {
+        describe.each(samplePrices)("GET / price %#", (price) => {
+            it("should get a price", async () => {
                 const res = await request(server)
-                    .delete("/stores/" + sampleStores[2]._id)
+                    .get("/prices/" + price._id)
+                    .set("Authorization", "Bearer " + token0)
+                    .send();
+                expect(res.statusCode).toEqual(200);
+                expect(res.body).toMatchObject(price);
+            });
+        });
+
+        describe("DELETE / price", () => {
+
+            it("should delete a price", async () => {
+                const res = await request(server)
+                    .delete("/prices/" + samplePrices[2]._id)
                     .set("Authorization", "Bearer " + token0)
                     .send();
                 expect(res.statusCode).toEqual(200);
 
                 const res1 = await request(server)
-                    .get("/stores")
+                    .get("/prices")
                     .set("Authorization", "Bearer " + token0)
                     .send();
                 expect(res1.statusCode).toEqual(200);
