@@ -11,4 +11,6 @@ const itemSchema = new mongoose.Schema({
   },
 });
 
+itemSchema.index({ name: "text", desctiption: "text", category: "text"});
+
 module.exports = mongoose.model("items", itemSchema);

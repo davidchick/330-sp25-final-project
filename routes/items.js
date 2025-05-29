@@ -28,6 +28,22 @@ const authorizeUser = (req, res, next) => {
     }
 };
 
+// Get all prices by item ID
+router.get("/:id/prices", authenticateUser, async (req, res, next) => {
+    const { id } = req.params;
+    const prices = await itemsDAO.getPricesForItem(id);
+    return res.status(200).json(prices);
+});
+
+// Get limit price by item ID
+router.get("/:id/:limit", authenticateUser, async (req, res, next) => {
+    const { id, limit } = req.params;
+    let limitValue;
+    limit === 'priciest' ? limitValue = -1 : limitValue = 1;
+    const onePrice = await itemsDAO.getPriceLimit(id, limitValue);
+    return res.status(200).json(onePrice);
+});
+
 // Get by item ID
 router.get("/:id", authenticateUser, async (req, res, next) => {
     const { id } = req.params;

@@ -10,4 +10,6 @@ const storeSchema = new mongoose.Schema({
   },
 });
 
+storeSchema.index({ name: "text", location: "text" });
+
 module.exports = mongoose.model("stores", storeSchema);
