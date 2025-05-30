@@ -52,7 +52,7 @@ router.get("/:id", authenticateUser, async (req, res, next) => {
 });
 
 // Get all items
-router.get("/", authenticateUser, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     const allItems = await itemsDAO.getAll();
     return res.status(200).json(allItems);
 });
