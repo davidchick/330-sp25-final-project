@@ -4,7 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { useEffect } from 'react'
 
-const API_URL = `https://${import.meta.env.VITE_API_URL}` || 'http://localhost:3000';
+let API_URL;
+import.meta.env.VITE_API_URL ? API_URL = `https://${import.meta.env.VITE_API_URL}` : API_URL = 'http://localhost:3000';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,8 +21,6 @@ function App() {
     });
 
   }, []);
-
-//console.log('burp');
 
   return (
     <>
