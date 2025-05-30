@@ -11,7 +11,7 @@ function App() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_URL}/items`)
+    fetch(`https://${API_URL}/items`)
     .then(res => res.json())
     .then((items) => {
       if (items) {
