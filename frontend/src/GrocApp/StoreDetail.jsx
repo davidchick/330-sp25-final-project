@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 function StoreDetail() {
-    const [store, setStore] = useState(null);
+    const [store, setStore] = useState([]);
     const { authToken } = useContext(AuthToken);
 
     const params = useParams();
@@ -18,7 +18,7 @@ function StoreDetail() {
 
         if (authToken) {
 
-            fetch(`${API_URL}/stores/${params.storeId}`, {
+            fetch(`${API_URL}/stores/${params.storeId}/prices`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${authToken}`,
@@ -38,27 +38,59 @@ function StoreDetail() {
 
     }, [authToken]);
 
-    if (store) {
+    if (store[0]) {
+
+        //console.log(store)
 
         return (
             <>
 
-                <h2>{store.name}</h2>
+                <h2>{store[0].name}</h2>
 
                 <p><Link to="/fe-stores">Back</Link></p>
 
-                <p>Location: {store.location}<br /></p>
+                <p>Location: {store[0].location}<br /></p>
 
-                {/* <ul>
-                    {Boolean(stores) && stores.map(store => <li key={store._id}>{store.name}, {store.location}</li>)}
-                </ul> */}
+                <h3>Items</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>On Sale</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {store.map(store =>
+                            <tr key={store.items._id}>
+                                <td>{store.items.name}</td>
+                                <td>{store.items.description}</td>
+                                <td>{store.items.category}</td>
+                                <td>{store.prices.price}</td>
+                                <td>{store.prices.onsale.toString()}</td>
+                                <td>{store.prices.date}</td>
+                            </tr>
+                        )}
+                    </tbody>
+
+                </table>
 
             </>
         )
 
     } else {
 
-        return (<p>no store</p>)
+        return (
+            <>
+                <p>no items for store</p>
+                <p><Link to="/fe-stores">Back</Link></p>
+            </>
+        );
 
     }
 

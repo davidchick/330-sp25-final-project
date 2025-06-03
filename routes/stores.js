@@ -41,6 +41,13 @@ router.get("/", authenticateUser, async (req, res, next) => {
     return res.status(200).json(allStores);
 });
 
+// Get all prices for a given store by store ID
+router.get("/:id/prices", authenticateUser, async (req, res, next) => {
+    const { id } = req.params;
+    const prices = await storesDAO.getPricesForStore(id);
+    return res.status(200).json(prices);
+});
+
 // Create a new store
 router.post("/", authenticateUser, authorizeUser, async (req, res, next) => {
     const newStore = req.body;
