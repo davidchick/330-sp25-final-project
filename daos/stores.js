@@ -41,15 +41,6 @@ module.exports.getPricesForStore = (id) => {
       }
     },
     { $unwind: "$items" },
-    // {
-    //   $group: {
-    //     _id: "$_id",
-    //     name: { $first: "$name" },
-    //     location: { $first: "$location" },
-    //     prices: { $addToSet: "$prices" },
-    //     items: { $addToSet: "$items"}
-    //   }
-    // },
     {
       $project: {
         _id: 1,

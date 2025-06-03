@@ -2,7 +2,72 @@
 
 ## Final Project for Q3 of Fullstack JavaScript
 
-### Project Update, May 21
+### Final Project Self Evaluation, June 3rd
+
+I found it challenging to just fulfil the basic requirements of the final project, so I didn't venture too far beyond what we covered in class. I was worried (rightly) that any added complexity would multiply the effort when it came to tests, UI, etc. 
+
+I plumbed in the basic DAOSs, models, and CRUD routes fairly early on. By the time I got the unit tests in and working, I was a little tired of my concept, which seemed a little too basic. I decided at that point to slap a UI on it, even though that wasn't required.
+
+After messing around with mustache for a bit, I decided to take the plunge and do a full React front end. A couple of observations:
+* It was very satisfying to come full circle with what we've learned over the year with a react front end and and express backend.
+* At the same time, I was saddened to see how quickly I had forgotten 90% of React.
+* Building out the UI was very helpful in refining my API design. It really helped me focus on what I needed to deliver to the front end, and made me question and refine a lot of my early API design.
+* Putting in the front end, while tedious, re-invigorated my enthusiasm for my overall concept.
+
+My tests are passing with 82% coverage, but there is certainly a lot more I could do in the way of tests. 
+
+My UI is vary basic raw HTML, if I had more time I'd probably explore Material UI or another package for easy UI polish.
+
+Mongo aggregations are tricky.
+
+I thought wiring up Mongodb Atlas and Railway was going to ba a lot harder than it was.
+
+Overall, I'm very happy with my end result, and I think my approach was pretty solid. Once I had the basic plumbing and CRUD routes in, it was pretty easy to expand on them and add new features. In future, I think I would sketch out the final UI first, and try to design the APIs around what would be needed to fulfil the UI, if that was the nature of the project.
+
+### Tests
+
+dchick@Davids-MacBook-Air 330-sp25-final-project % npm run test:coverage
+
+> 330-sp25-final-project@1.0.0 test:coverage
+> jest --runInBand --coverage
+
+ PASS  routes/__test__/items.test.js
+ PASS  routes/__test__/auth.test.js
+ PASS  routes/__test__/prices.test.js
+ PASS  routes/__test__/stores.test.js
+-------------------------------|---------|----------|---------|---------|-------------------------
+File                           | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s       
+-------------------------------|---------|----------|---------|---------|-------------------------
+All files                      |   81.55 |    75.86 |   70.49 |   81.44 |                         
+ 330-sp25-final-project        |     100 |      100 |     100 |     100 |                         
+  server.js                    |     100 |      100 |     100 |     100 |                         
+  test-utils.js                |     100 |      100 |     100 |     100 |                         
+ 330-sp25-final-project/daos   |   74.52 |      100 |      60 |   74.52 |                         
+  auth.js                      |   72.09 |      100 |   57.14 |   72.09 | 12,28,44,54,59-63,68-72 
+  items.js                     |   65.21 |      100 |   42.85 |   65.21 | 11,16,24,65,94-98       
+  prices.js                    |   84.21 |      100 |      80 |   84.21 | 11,24,32                
+  stores.js                    |   80.95 |      100 |   66.66 |   80.95 | 11,24,58,66             
+ 330-sp25-final-project/models |     100 |      100 |     100 |     100 |                         
+  item.js                      |     100 |      100 |     100 |     100 |                         
+  price.js                     |     100 |      100 |     100 |     100 |                         
+  store.js                     |     100 |      100 |     100 |     100 |                         
+  user.js                      |     100 |      100 |     100 |     100 |                         
+ 330-sp25-final-project/routes |   82.03 |    73.07 |   74.19 |   82.03 |                         
+  auth.js                      |   82.75 |    79.16 |   85.71 |   82.75 | 27,49,78,88-89,95-100   
+  index.js                     |     100 |      100 |     100 |     100 |                         
+  items.js                     |   72.54 |       50 |   55.55 |   72.54 | 33-35,40-44,56-57,79-84 
+  prices.js                    |   88.37 |       75 |   85.71 |   88.37 | 18,57-59,66             
+  stores.js                    |    82.6 |       80 |      75 |    82.6 | 18,46-48,63-65,72       
+-------------------------------|---------|----------|---------|---------|-------------------------
+
+Test Suites: 4 passed, 4 total
+Tests:       65 passed, 65 total
+Snapshots:   0 total
+Time:        1.74 s
+Ran all test suites.
+
+
+### Project Update, May 21st
 
 #### Done
 * project is set up and running
