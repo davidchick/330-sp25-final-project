@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthToken } from './AuthToken';
+import { Link } from "react-router-dom";
 
 
 function Items() {
@@ -23,10 +24,12 @@ function Items() {
   return (
     <>
 
-      <h2>Grocery Comparatorizer</h2>
+      <h2>Items</h2>
+
+      <Link to="/">Home</Link>
 
       <ul>
-        {Boolean(items) && items.map(item => <li key={item._id}>{item.name}, {item.description}</li>)}
+        {Boolean(items) && items.map(item => <li key={item._id}><Link to={item._id}>{item.name}</Link>, {item.description}</li>)}
       </ul>
 
     </>

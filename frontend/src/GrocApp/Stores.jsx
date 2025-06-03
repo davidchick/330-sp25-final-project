@@ -1,5 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
+import { Link } from "react-router-dom";
 import { AuthToken } from './AuthToken';
+import AddStore from './AddStore';
+
 
 
 function Stores() {
@@ -32,16 +35,20 @@ function Stores() {
 
     }
 
-  }, [authToken]);
+  }, [stores, authToken]);
 
   return (
     <>
 
       <h2>Stores</h2>
 
+      <Link to="/">Home</Link>
+
       <ul>
-        {Boolean(stores) && stores.map(store => <li key={store._id}>{store.name}, {store.location}</li>)}
+        {Boolean(stores) && stores.map(store => <li key={store._id}><Link to={store._id}>{store.name}</Link>, {store.location}</li>)}
       </ul>
+
+      <AddStore />
 
     </>
   )
