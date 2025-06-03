@@ -2,7 +2,7 @@
 import { useState, useContext } from 'react';
 import { AuthToken } from './AuthToken';
 
-function AddStore() {
+function AddStore({ onStoreAdded }) {
 
     const { authToken } = useContext(AuthToken);
 
@@ -27,8 +27,6 @@ function AddStore() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(formData);
-
         try {
             const response = await fetch(`${API_URL}/stores`, {
                 method: 'POST',
@@ -44,6 +42,9 @@ function AddStore() {
                 setMessage('Store Added!');
                 console.log('Success:', result);
                 // Handle successful login (e.g., redirect, store token, etc.)
+                if (onStoreAdded) {
+                    onStoreAdded();
+                }
 
             } else {
                 const error = await response.json();
@@ -68,6 +69,7 @@ function AddStore() {
                 <input type="text" name="name" onChange={handleInputChange}></input><br />
                 <label htmlFor="location">Location: </label>
                 <input type="text" name="location" onChange={handleInputChange}></input><br />
+                <br />
                 <button type="submit" onClick={handleSubmit}>Add Store</button><br />
             </form>
         </>

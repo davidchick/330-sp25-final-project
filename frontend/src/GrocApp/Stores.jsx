@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { AuthToken } from './AuthToken';
 import AddStore from './AddStore';
 
-
-
 function Stores() {
   const [stores, setStores] = useState([]);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const { authToken } = useContext(AuthToken);
 
   let API_URL;
@@ -24,18 +23,19 @@ function Stores() {
         }
       })
         .then(res => res.json())
-        .then((stores) => {
-          if (stores) {
-            setStores(stores);
+        .then((obj) => {
+          if (obj) {
+            setStores(obj);
           }
         });
 
-      // 'Content-Type': 'application/json', // Optional: if sending JSON
-      // body: JSON.stringify(data), // Optional: if sending data in the body
-
     }
 
-  }, [stores, authToken]);
+  }, [refreshTrigger, authToken]);
+
+  const handleStoreAdded = () => {
+    setRefreshTrigger(prev => prev + 1);
+  };
 
   return (
     <>
@@ -48,7 +48,7 @@ function Stores() {
         {Boolean(stores) && stores.map(store => <li key={store._id}><Link to={store._id}>{store.name}</Link>, {store.location}</li>)}
       </ul>
 
-      <AddStore />
+      <AddStore onStoreAdded={handleStoreAdded} />
 
     </>
   )

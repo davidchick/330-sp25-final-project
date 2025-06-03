@@ -2,10 +2,11 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthToken } from './AuthToken';
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import AddPrice from './AddPrice';
 
 function StoreDetail() {
     const [store, setStore] = useState([]);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
     const { authToken } = useContext(AuthToken);
 
     const params = useParams();
@@ -25,22 +26,22 @@ function StoreDetail() {
                 }
             })
                 .then(res => res.json())
-                .then((store) => {
-                    if (store) {
-                        setStore(store);
+                .then((obj) => {
+                    if (obj) {
+                        setStore(obj);
                     }
                 });
 
-            // 'Content-Type': 'application/json', // Optional: if sending JSON
-            // body: JSON.stringify(data), // Optional: if sending data in the body
-
         }
 
-    }, [authToken]);
+    }, [refreshTrigger, authToken]);
+
+    const handleStoreAdded = () => {
+        setRefreshTrigger(prev => prev + 1);
+    };
 
     if (store[0]) {
 
-        //console.log(store)
 
         return (
             <>
@@ -51,7 +52,7 @@ function StoreDetail() {
 
                 <p>Location: {store[0].location}<br /></p>
 
-                <h3>Items</h3>
+                <h3>Prices</h3>
 
                 <table>
                     <thead>
@@ -67,7 +68,7 @@ function StoreDetail() {
 
                     <tbody>
                         {store.map(store =>
-                            <tr key={store.items._id}>
+                            <tr key={store.prices._id}>
                                 <td>{store.items.name}</td>
                                 <td>{store.items.description}</td>
                                 <td>{store.items.category}</td>
@@ -80,6 +81,7 @@ function StoreDetail() {
 
                 </table>
 
+                <AddPrice storeId={params.storeId} onStoreAdded={handleStoreAdded} />
             </>
         )
 
@@ -87,8 +89,10 @@ function StoreDetail() {
 
         return (
             <>
-                <p>no items for store</p>
+                <p>no prices for store</p>
                 <p><Link to="/fe-stores">Back</Link></p>
+
+                <AddPrice storeId={params.storeId} onStoreAdded={handleStoreAdded} />
             </>
         );
 
