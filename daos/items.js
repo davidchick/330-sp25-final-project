@@ -28,21 +28,31 @@ module.exports.getPricesForItem = (id) => {
                 from: "prices",
                 localField: "_id",
                 foreignField: "itemId",
-                as: "prices"
+                as: "price"
             }
         },
-        { $unwind: "$prices" },
+        { $unwind: "$price" },
+        {
+            $lookup: {
+                from: "stores",
+                localField: "price.storeId",
+                foreignField: "_id",
+                as: "price.store"
+            }
+        },
+        { $unwind: "$price.store" },
         {
             $group: {
                 _id: "$_id",
                 name: { $first: "$name" },
                 description: { $first: "$description" },
                 category: { $first: "$category" },
-                averagePrice: { $avg: "$prices.price" },
-                lowPrice: { $min: "$prices.price" },
-                highPrice: { $max: "$prices.price" },
+                averagePrice: { $avg: "$price.price" },
+                lowPrice: { $min: "$price.price" },
+                highPrice: { $max: "$price.price" },
                 priceCount: { $sum: 1 },
-                prices: { $addToSet: "$prices" }
+                prices: { $addToSet: "$price" },
+                //stores: { $addToSet: "$store" }
             }
         },
         {
@@ -55,7 +65,8 @@ module.exports.getPricesForItem = (id) => {
                 lowPrice: 1,
                 highPrice: 1,
                 priceCount: 1,
-                prices: 1
+                prices: 1,
+                //stores: 1
             }
         }
     ]);

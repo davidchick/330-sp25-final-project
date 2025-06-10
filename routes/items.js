@@ -29,14 +29,14 @@ const authorizeUser = (req, res, next) => {
 };
 
 // Get all prices by item ID
-router.get("/:id/prices", authenticateUser, async (req, res, next) => {
+router.get("/:id/prices", async (req, res, next) => {
     const { id } = req.params;
     const prices = await itemsDAO.getPricesForItem(id);
     return res.status(200).json(prices);
 });
 
 // Get limit price by item ID
-router.get("/:id/:limit", authenticateUser, async (req, res, next) => {
+router.get("/:id/:limit", async (req, res, next) => {
     const { id, limit } = req.params;
     let limitValue;
     limit === 'priciest' ? limitValue = -1 : limitValue = 1;
@@ -45,14 +45,14 @@ router.get("/:id/:limit", authenticateUser, async (req, res, next) => {
 });
 
 // Get by item ID
-router.get("/:id", authenticateUser, async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
     const { id } = req.params;
     const oneItem = await itemsDAO.getById(id);
     return res.status(200).json(oneItem);
 });
 
 // Get all items
-router.get("/", authenticateUser, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     const allItems = await itemsDAO.getAll();
     return res.status(200).json(allItems);
 });

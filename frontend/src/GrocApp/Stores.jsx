@@ -14,24 +14,15 @@ function Stores() {
 
   useEffect(() => {
 
-    if (authToken) {
-
-      fetch(`${API_URL}/stores`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${authToken}`,
+    fetch(`${API_URL}/stores`)
+      .then(res => res.json())
+      .then((obj) => {
+        if (obj) {
+          setStores(obj);
         }
       })
-        .then(res => res.json())
-        .then((obj) => {
-          if (obj) {
-            setStores(obj);
-          }
-        });
 
-    }
-
-  }, [refreshTrigger, authToken]);
+  }, [refreshTrigger]);
 
   const handleStoreAdded = () => {
     setRefreshTrigger(prev => prev + 1);
@@ -41,8 +32,6 @@ function Stores() {
     <>
 
       <h2>Stores</h2>
-
-      <Link to="/">Home</Link>
 
       <ul>
         {Boolean(stores) && stores.map(store => <li key={store._id}><Link to={store._id}>{store.name}</Link>, {store.location}</li>)}

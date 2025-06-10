@@ -29,20 +29,20 @@ const authorizeUser = (req, res, next) => {
 };
 
 // Get by store ID
-router.get("/:id", authenticateUser, async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
     const { id } = req.params;
     const oneStore = await storesDAO.getById(id);
     return res.status(200).json(oneStore);
 });
 
 // Get all stores
-router.get("/", authenticateUser, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     const allStores = await storesDAO.getAll();
     return res.status(200).json(allStores);
 });
 
 // Get all prices for a given store by store ID
-router.get("/:id/prices", authenticateUser, async (req, res, next) => {
+router.get("/:id/prices", async (req, res, next) => {
     const { id } = req.params;
     const prices = await storesDAO.getPricesForStore(id);
     return res.status(200).json(prices);

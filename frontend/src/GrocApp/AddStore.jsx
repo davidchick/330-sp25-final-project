@@ -62,7 +62,7 @@ function AddStore({ onStoreAdded }) {
 
     return (
         <>
-            <h3>Add A Store</h3>
+            <h3>Add a Store</h3>
 
             <form>
                 <label htmlFor="name">Name: </label>

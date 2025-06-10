@@ -79,7 +79,7 @@ function AddPrice(props) {
 
     return (
         <>
-            <h3>Add A Price</h3>
+            <h3>Add a Price</h3>
 
             <form>
                 <label htmlFor="itemId">Item: </label>

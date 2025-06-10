@@ -14,27 +14,19 @@ function StoreDetail() {
     let API_URL;
     import.meta.env.VITE_API_URL ? API_URL = `https://${import.meta.env.VITE_API_URL}` : API_URL = 'http://localhost:3000';
 
-
     useEffect(() => {
 
-        if (authToken) {
-
-            fetch(`${API_URL}/stores/${params.storeId}/prices`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${authToken}`,
+        fetch(`${API_URL}/stores/${params.storeId}/prices`, {
+            method: 'GET'
+        })
+            .then(res => res.json())
+            .then((obj) => {
+                if (obj) {
+                    setStore(obj);
                 }
-            })
-                .then(res => res.json())
-                .then((obj) => {
-                    if (obj) {
-                        setStore(obj);
-                    }
-                });
+            });
 
-        }
-
-    }, [refreshTrigger, authToken]);
+    }, [refreshTrigger]);
 
     const handleStoreAdded = () => {
         setRefreshTrigger(prev => prev + 1);
@@ -47,8 +39,6 @@ function StoreDetail() {
             <>
 
                 <h2>{store[0].name}</h2>
-
-                <p><Link to="/fe-stores">Back</Link></p>
 
                 <p>Location: {store[0].location}<br /></p>
 
@@ -69,10 +59,10 @@ function StoreDetail() {
                     <tbody>
                         {store.map(store =>
                             <tr key={store.prices._id}>
-                                <td>{store.items.name}</td>
+                                <td><Link to={`/fe-items/${store.items._id}`}>{store.items.name}</Link></td>
                                 <td>{store.items.description}</td>
                                 <td>{store.items.category}</td>
-                                <td>{store.prices.price}</td>
+                                <td>{store.prices.price.toFixed(2)}</td>
                                 <td>{store.prices.onsale.toString()}</td>
                                 <td>{store.prices.date}</td>
                             </tr>
@@ -89,8 +79,7 @@ function StoreDetail() {
 
         return (
             <>
-                <p>no prices for store</p>
-                <p><Link to="/fe-stores">Back</Link></p>
+                <p>No prices saved for this store yet.</p>
 
                 <AddPrice storeId={params.storeId} onStoreAdded={handleStoreAdded} />
             </>

@@ -29,14 +29,14 @@ const authorizeUser = (req, res, next) => {
 };
 
 // Get by price ID
-router.get("/:id", authenticateUser, async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
     const { id } = req.params;
     const onePrice = await pricesDAO.getById(id);
     return res.status(200).json(onePrice);
 });
 
 // Get all prices
-router.get("/", authenticateUser, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     const allPrices = await pricesDAO.getAll();
     return res.status(200).json(allPrices);
 });
