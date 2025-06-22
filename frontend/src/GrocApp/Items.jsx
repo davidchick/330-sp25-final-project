@@ -10,7 +10,7 @@ function Items() {
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   let API_URL;
-  import.meta.env.VITE_API_URL ? API_URL = `https://${import.meta.env.VITE_API_URL}` : API_URL = 'http://localhost:3000';
+  import.meta.env.VITE_API_URL ? API_URL = `http://${import.meta.env.VITE_API_URL}` : API_URL = 'http://localhost:3000';
 
   useEffect(() => {
     fetch(`${API_URL}/items`, {
