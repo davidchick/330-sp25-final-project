@@ -11,7 +11,7 @@ function Items() {
 
   let API_URL;
   import.meta.env.VITE_API_URL ? API_URL = `http://${import.meta.env.VITE_API_URL}` : API_URL = 'http://localhost:3000';
-  API_URL = '34.213.67.248:3000';
+  //API_URL = '34.213.67.248:3000';
 
   useEffect(() => {
     fetch(`${API_URL}/items`, {
